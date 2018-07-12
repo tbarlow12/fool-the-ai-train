@@ -76,8 +76,10 @@ class KaggleImages(ImageRepo):
 
 class FTAI_Images(ImageRepo):
 
-    source_container = 'approved-images-dev'
-    dest_container = 'processed-images-dev'
+    prod = True
+   
+    source_container = 'approved-images-prod' if prod else 'approved-images-dev'
+    dest_container = 'processed-images-prod' if prod else 'processed-images-dev'
 
     def mark_blob_processed(self, guid):
         cursor = self.sql_service.get_cursor()
